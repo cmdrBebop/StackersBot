@@ -6,11 +6,12 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.fsm_storage.redis import RedisStorage2
 from aioredis import Redis
 
-from bot.tgbot.services.db.database import Database
+from tgbot.services.db.database import Database
 from tgbot.config import load_config
 from tgbot import handlers
 from tgbot import filters
 from tgbot import middlewares
+from tgbot.services.schedulers import start_schedulers
 
 
 logger = logging.getLogger(__name__)
@@ -60,6 +61,8 @@ async def main():
     register_all_middlewares(dp, config)
     register_all_filters(dp)
     register_all_handlers(dp)
+
+    asyncio.create_task(start_schedulers(config, bot, database))
 
     try:
         await dp.start_polling()

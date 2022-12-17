@@ -21,7 +21,7 @@ class TelegramBot:
 
 @dataclass
 class Miscellaneous:
-    other_params: str = ''
+    updates_from_server_interval: int
 
 
 @dataclass
@@ -48,5 +48,7 @@ def load_config(path: str = None):
             database=env.str('DB_NAME'),
             port=env.int('DB_PORT')
         ),
-        misc=Miscellaneous()
+        misc=Miscellaneous(
+            updates_from_server_interval=env.int('UPDATES_FROM_SERVER_INTERVAL'),
+        )
     )
