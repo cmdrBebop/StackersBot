@@ -6,6 +6,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.fsm_storage.redis import RedisStorage2
 from aioredis import Redis
 
+from bot.tgbot.services.db.database import Database
 from tgbot.config import load_config
 from tgbot import handlers
 from tgbot import filters
@@ -41,10 +42,20 @@ async def main():
     storage = RedisStorage2() if config.bot.use_redis else MemoryStorage()
     bot = Bot(token=config.bot.token, parse_mode='HTML')
     dp = Dispatcher(bot, storage=storage)
+
+    database = Database(
+        host=config.database.host,
+        password=config.database.password,
+        user=config.database.user,
+        database=config.database.database,
+        port=config.database.port
+    )
+
     redis = Redis()
 
     bot['config'] = config
     bot['redis'] = redis
+    bot['database'] = database
 
     register_all_middlewares(dp, config)
     register_all_filters(dp)
@@ -53,9 +64,14 @@ async def main():
     try:
         await dp.start_polling()
     finally:
+        await database.close_pools()
+        await redis.save()
+
+        bot_session = await bot.get_session()
+        await bot_session.close()
+
         await dp.storage.close()
         await dp.storage.wait_closed()
-        await bot.session.close()
 
 
 if __name__ == '__main__':
