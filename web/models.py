@@ -10,7 +10,7 @@ class User(models.Model):
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
 
     def __str__(self):
-        return f'{self.second_name} {self.first_name} {self.telegram_username}'
+        return f'{self.second_name} {self.first_name}'
 
 
     class Meta:
@@ -50,7 +50,7 @@ class Event(models.Model):
     post_about_event = models.TextField(verbose_name='Текст поста мероприятия')
 
     def __str__(self):
-        return f'{self.title} {self.event_date}'
+        return f'{self.title} - {self.event_date}'
 
 
     class Meta:
@@ -85,7 +85,7 @@ class UserStack(models.Model):
     stack = models.ManyToManyField(Stack, verbose_name='Стек технологий')
 
     def __str__(self):
-        return f'{self.user} {self.stack}'
+        return f'{self.user}'
 
     class Meta:
         verbose_name = 'Стек пользователя'
@@ -97,7 +97,7 @@ class EventStack(models.Model):
     stack = models.ManyToManyField(Stack, verbose_name='Стек технологий')
 
     def __str__(self):
-        return f'{self.event} {self.stack}'
+        return f'{self.event}'
 
     class Meta:
         verbose_name = 'Стек мероприятия'
