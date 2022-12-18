@@ -1,5 +1,17 @@
 from django.db import models
 
+
+class Stack(models.Model):
+    title = models.CharField(max_length=100, verbose_name='Название стека технологий')
+
+    def __str__(self):
+        return f'{self.title}'
+
+    class Meta:
+        verbose_name = 'Стек технологий'
+        verbose_name_plural = 'Стеки технологий'
+
+
 class User(models.Model):
     tg_id = models.IntegerField(verbose_name='telegram id', primary_key=True)
     first_name = models.CharField(max_length=30, verbose_name='Имя пользователя')
@@ -8,14 +20,15 @@ class User(models.Model):
     about_user = models.TextField(verbose_name='О пользователе')
     telegram_username = models.CharField(max_length=50, verbose_name='telegram', unique=True)
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
+    stacks = models.ManyToManyField(Stack)
 
     def __str__(self):
         return f'{self.second_name} {self.first_name}'
 
-
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
+
 
 class Subscribe(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
@@ -26,7 +39,6 @@ class Subscribe(models.Model):
 
     def __str__(self):
         return f'{self.user} {self.hackathon_subscribe} {self.lecture_subscribe} {self.meet_up_subscribe} {self.vacancy_subscribe}'
-
 
     class Meta:
         verbose_name = 'Подписка'
@@ -43,20 +55,21 @@ class EventType(models.Model):
         verbose_name = 'Тип мероприятия'
         verbose_name_plural = 'Типы мероприятий'
 
+
 class Event(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название мероприятия')
     event_date = models.DateField(verbose_name='Дата проведения мероприятия')
     type_of_event = models.ForeignKey(EventType, on_delete=models.PROTECT, verbose_name='Тип мероприятия')
     post_about_event = models.TextField(verbose_name='Текст поста мероприятия')
+    stacks = models.ManyToManyField(Stack)
 
     def __str__(self):
-        return f'{self.title} - {self.event_date}'
+        return f'{self.title} {self.event_date}'
 
 
     class Meta:
         verbose_name = 'Мероприятие'
         verbose_name_plural = 'Мероприятия'
-
 
 
 class UserEvent(models.Model):
@@ -70,6 +83,7 @@ class UserEvent(models.Model):
         verbose_name = 'Посетитель мероприятий'
         verbose_name_plural = 'Посетители мероприятий'
 
+
 class Stack(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название стека технологий')
 
@@ -80,28 +94,7 @@ class Stack(models.Model):
         verbose_name = 'Стек технологий'
         verbose_name_plural = 'Стеки технологий'
 
-class UserStack(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
-    stack = models.ManyToManyField(Stack, verbose_name='Стек технологий')
 
-    def __str__(self):
-        return f'{self.user}'
-
-    class Meta:
-        verbose_name = 'Стек пользователя'
-        verbose_name_plural = 'Стеки пользователей'
-
-
-class EventStack(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name='Мероприятие')
-    stack = models.ManyToManyField(Stack, verbose_name='Стек технологий')
-
-    def __str__(self):
-        return f'{self.event}'
-
-    class Meta:
-        verbose_name = 'Стек мероприятия'
-        verbose_name_plural = 'Стеки мероприятий'
 
 class Message(models.Model):
     profile = models.ForeignKey(
