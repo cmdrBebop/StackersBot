@@ -64,7 +64,8 @@ class Event(models.Model):
     stacks = models.ManyToManyField(Stack)
 
     def __str__(self):
-        return f'{self.title} - {self.event_date}'
+        return f'{self.title} {self.event_date}'
+
 
     class Meta:
         verbose_name = 'Мероприятие'
@@ -81,6 +82,18 @@ class UserEvent(models.Model):
     class Meta:
         verbose_name = 'Посетитель мероприятий'
         verbose_name_plural = 'Посетители мероприятий'
+
+
+class Stack(models.Model):
+    title = models.CharField(max_length=100, verbose_name='Название стека технологий')
+
+    def __str__(self):
+        return f'{self.title}'
+
+    class Meta:
+        verbose_name = 'Стек технологий'
+        verbose_name_plural = 'Стеки технологий'
+
 
 
 class Message(models.Model):

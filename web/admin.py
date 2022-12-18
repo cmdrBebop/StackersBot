@@ -32,6 +32,8 @@ class EventTypeAdmin(admin.ModelAdmin):
 class EventAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'event_date', 'type_of_event', 'post_about_event')
     list_display_links = ('id', 'title', 'event_date', 'type_of_event', 'post_about_event')
+    list_filter = ('event_date', 'type_of_event')
+    search_fields = ('title', 'post_about_event')
     form = EventForm
     filter_horizontal = ['stacks']
 
@@ -40,6 +42,7 @@ class EventAdmin(admin.ModelAdmin):
 class UserEventAdmin(admin.ModelAdmin):
     list_display = ('user', 'event')
     list_display_links = ('user', 'event')
+    search_fields = ['event__title']
     form = UserEventForm
 
 
@@ -48,6 +51,7 @@ class StackAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
     list_display_links = ('id', 'title')
     form = StackForm
+
 
 
 @admin.register(Message)

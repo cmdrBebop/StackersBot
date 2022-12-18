@@ -47,6 +47,7 @@ class EventForm(forms.ModelForm):
             'type_of_event',
             'post_about_event',
             'stacks'
+
         )
 
 
