@@ -11,8 +11,9 @@ import tgbot.misc.callbacks as callbacks
 
 async def request_to_update_form(call: CallbackQuery):
     # todo get information about user, add text for user's form
-    await call.message.answer("Вот моя анкета!!!!", reply_markup=inline_keyboards.form_about_me_update)
-    await states.Survey.starting_completing.set()
+    await call.message.edit_text("Вот моя анкета!!!!", reply_markup=inline_keyboards.form_about_me_update)
+    # await states.Survey.starting_completing.set()
+    await call.answer()
 
 
 async def form_competing_cancel(call: CallbackQuery, state: FSMContext):

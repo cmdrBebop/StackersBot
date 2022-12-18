@@ -39,8 +39,8 @@ form_about_me_update = InlineKeyboardMarkup(row_width=1)
 form_about_me_update.add(
     InlineKeyboardButton('Хочу обновить свою анкету :)',
                          callback_data=callbacks.change_to_update_form.new(answer='yes')),
-    InlineKeyboardButton('Оставить все, как есть',
-                         callback_data=callbacks.change_to_update_form.new(answer='cancel'))
+    InlineKeyboardButton('Назад',
+                         callback_data=callbacks.navigation.new(to='main_menu', payload=''))
 )
 
 control_asking_to_save_form = InlineKeyboardMarkup(row_width=2)
