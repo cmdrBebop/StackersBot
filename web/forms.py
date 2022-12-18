@@ -66,14 +66,3 @@ class StackForm(forms.ModelForm):
             'id',
             'title',
         )
-
-
-'''class UserStackForm(forms.ModelForm):
-
-    class Meta:
-        model = UserStack
-        fields = (
-            'user',
-            'stack',
-        )
-'''
