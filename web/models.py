@@ -84,16 +84,6 @@ class UserEvent(models.Model):
         verbose_name_plural = 'Посетители мероприятий'
 
 
-class Stack(models.Model):
-    title = models.CharField(max_length=100, verbose_name='Название стека технологий')
-
-    def __str__(self):
-        return f'{self.title}'
-
-    class Meta:
-        verbose_name = 'Стек технологий'
-        verbose_name_plural = 'Стеки технологий'
-
 
 
 class Message(models.Model):
