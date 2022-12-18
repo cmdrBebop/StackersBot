@@ -19,6 +19,7 @@ user_statistics = (
 
 user_information_for_check = (
     'ФИО: {user_full_name}\n'
+    'Дата рождения: {user_birth_date}\n'
     'Стек: {user_stack}\n'
     'О себе:\n'
     '{user_about_me}'
