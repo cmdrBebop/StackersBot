@@ -4,7 +4,6 @@ from .models import *
 
 
 class UserForm(forms.ModelForm):
-
     class Meta:
         model = User
         fields = (
@@ -14,11 +13,12 @@ class UserForm(forms.ModelForm):
             'birthdate',
             'telegram_username',
             'about_user',
-            'rating'
+            'rating',
+            'stacks'
         )
 
-class SubscribeForm(forms.ModelForm):
 
+class SubscribeForm(forms.ModelForm):
     class Meta:
         model = Subscribe
         fields = (
@@ -29,27 +29,28 @@ class SubscribeForm(forms.ModelForm):
             'vacancy_subscribe',
         )
 
-class EventTypeForm(forms.ModelForm):
 
+class EventTypeForm(forms.ModelForm):
     class Meta:
         model = EventType
         fields = (
             'title',
         )
 
-class EventForm(forms.ModelForm):
 
+class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = (
             'title',
             'event_date',
             'type_of_event',
-            'post_about_event'
+            'post_about_event',
+            'stacks'
         )
 
-class UserEventForm(forms.ModelForm):
 
+class UserEventForm(forms.ModelForm):
     class Meta:
         model = UserEvent
         fields = (
@@ -57,8 +58,8 @@ class UserEventForm(forms.ModelForm):
             'event',
         )
 
-class StackForm(forms.ModelForm):
 
+class StackForm(forms.ModelForm):
     class Meta:
         model = Stack
         fields = (
@@ -66,7 +67,8 @@ class StackForm(forms.ModelForm):
             'title',
         )
 
-class UserStackForm(forms.ModelForm):
+
+'''class UserStackForm(forms.ModelForm):
 
     class Meta:
         model = UserStack
@@ -74,13 +76,4 @@ class UserStackForm(forms.ModelForm):
             'user',
             'stack',
         )
-
-class EventStackForm(forms.ModelForm):
-
-    class Meta:
-        model = EventStack
-        fields = (
-            'event',
-            'stack',
-        )
-
+'''
