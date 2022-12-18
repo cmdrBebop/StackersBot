@@ -1,8 +1,15 @@
 from django.contrib import admin
-
+from django_admin_filters import MultiChoice
 from .forms import *
 from .models import *
 
+
+
+
+
+class StatusFilter(MultiChoice):
+    FILTER_LABEL = "По стеку"
+    BUTTON_LABEL = "Применить"
 
 @admin.register(User)
 class ProfileAdmin(admin.ModelAdmin):
@@ -11,6 +18,7 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('tg_id', 'first_name', 'second_name', 'telegram_username')
     form = UserForm
     filter_horizontal = ['stacks']
+    list_filter = [('stacks__title', StatusFilter)]
 
 
 @admin.register(Subscribe)
