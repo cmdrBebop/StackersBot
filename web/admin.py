@@ -30,12 +30,15 @@ class EventTypeAdmin(admin.ModelAdmin):
 class EventAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'event_date', 'type_of_event', 'post_about_event')
     list_display_links = ('id', 'title', 'event_date', 'type_of_event', 'post_about_event')
+    list_filter = ('event_date', 'type_of_event')
+    search_fields = ('title', 'post_about_event')
     form = EventForm
 
 @admin.register(UserEvent)
 class UserEventAdmin(admin.ModelAdmin):
     list_display = ('user', 'event')
     list_display_links = ('user', 'event')
+    search_fields = ['event__title']
     form = UserEventForm
 
 @admin.register(Stack)
@@ -50,14 +53,16 @@ class UserStackAdmin(admin.ModelAdmin):
     list_display = ('user',)
     list_display_links = ('user',)
     filter_horizontal = ['stack']
+    search_fields = ('user__first_name','user__second_name', 'stack__title')
+    list_filter = ('user__telegram_username', )
     form = UserStackForm
 
 @admin.register(EventStack)
 class EventStackAdmin(admin.ModelAdmin):
     list_display = ('event',)
     list_display_links = ('event',)
-    list_filter = ('stack',)
     filter_horizontal = ['stack']
+    search_fields = ('stack__title', 'event__title')
     form = EventStackForm
 
 @admin.register(Message)

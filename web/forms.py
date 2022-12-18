@@ -45,7 +45,7 @@ class EventForm(forms.ModelForm):
             'title',
             'event_date',
             'type_of_event',
-            'post_about_event'
+            'post_about_event',
         )
 
 class UserEventForm(forms.ModelForm):
