@@ -2,20 +2,19 @@ hello = (
     'Hello, {username}'
 )
 
-textOfUsersSubscribtions = """
-        Ваши подписки
+user_subscribes_status = (
+    'Ваши подписки:\n\n'
+    'Подписка на хакатоны: {hackathon_sub_status}\n\n'
+    'Подписка на лекции: {lecture_sub_status}\n\n'
+    'Подписка на Митапы: {meet_up_sub_status}\n\n'
+)
 
-Подписка на хакатоны: {textSubToHack}
+user_statistics = (
+    'Статистика\n\n'
+    'Рейтинг: {rate}\n'
+    'Посещено мероприятий: {number_of_visits}\n'
+    'Мероприятия:\n'
+)
 
-Подписка на лекции: {textSubToLect}
-
-Подписка на Митапы: {textSubToMeetUp}
-
-"""
-
-textOfUserStatistic = """
-        Статистика
-Рейтинг: {}
-Посещено мероприятий: {}
-{}
-"""
+positive_toggle = 'Есть ✅'
+negative_toggle = 'Нет ⛔️'

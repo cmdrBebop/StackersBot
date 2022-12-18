@@ -1,6 +1,6 @@
 import logging
 
-import bot.tgbot.services.db.workers as workers
+import tgbot.services.db.workers as workers
 
 
 class Database:

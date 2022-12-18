@@ -1,7 +1,7 @@
 import asyncpg
 
-from bot.tgbot.services.db.workers.worker_base import Worker
-import bot.tgbot.services.db.workers as workers
+from tgbot.services.db.workers.worker_base import Worker
+import tgbot.services.db.workers as workers
 
 
 class UsersWorker(Worker):

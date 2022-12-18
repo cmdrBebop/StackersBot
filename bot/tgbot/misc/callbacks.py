@@ -1,4 +1,4 @@
 from aiogram.utils.callback_data import CallbackData
 
-callBMainMenu = CallbackData("mMenu", "childMenu")
-callSubsMenu = CallbackData("SMenu", "changeSub")
+navigation = CallbackData('nav', 'to', 'payload')
+change_subscribe = CallbackData('change_subscribe', 'object')
