@@ -39,14 +39,16 @@ class StackAdmin(admin.ModelAdmin):
 
 @admin.register(UserStack)
 class UserStackAdmin(admin.ModelAdmin):
-    list_display = ('user', 'stack')
+    list_display = ('user',)
     form = UserStackForm
 
 @admin.register(EventStack)
 class EventStackAdmin(admin.ModelAdmin):
-    list_display = ('event', 'stack')
+    list_display = ('event',)
+    list_filter = ('stack',)
     form = EventStackForm
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
     list_display = ('id', 'profile', 'text', 'created_at')
+

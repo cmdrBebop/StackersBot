@@ -83,3 +83,4 @@ class EventStackForm(forms.ModelForm):
             'event',
             'stack',
         )
+

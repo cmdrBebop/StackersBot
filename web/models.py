@@ -82,7 +82,7 @@ class Stack(models.Model):
 
 class UserStack(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
-    stack = models.ForeignKey(Stack, on_delete=models.PROTECT, verbose_name='Стек технологий')
+    stack = models.ManyToManyField(Stack, verbose_name='Стек технологий')
 
     def __str__(self):
         return f'#{self.user} {self.stack}'
@@ -94,7 +94,7 @@ class UserStack(models.Model):
 
 class EventStack(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name='Мероприятие')
-    stack = models.ForeignKey(Stack, on_delete=models.PROTECT, verbose_name='Стек технологий')
+    stack = models.ManyToManyField(Stack, verbose_name='Стек технологий')
 
     def __str__(self):
         return f'#{self.event} {self.stack}'
