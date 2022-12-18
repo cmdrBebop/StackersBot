@@ -8,6 +8,7 @@ aiogram = "*"
 aioredis = "*"
 environs = "*"
 asyncpg = "*"
+aioschedule = "*"
 
 [dev-packages]
 
