@@ -71,7 +71,22 @@ class Event(models.Model):
         verbose_name = 'Мероприятие'
         verbose_name_plural = 'Мероприятия'
 
+class UserStack(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    stack = models.ForeignKey(Stack, on_delete=models.PROTECT, verbose_name='Стек технологий')
+    stack = models.ManyToManyField(Stack, verbose_name='Стек технологий')
 
+    def __str__(self):
+        return f'#{self.user} {self.stack}'
+
+
+class EventStack(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name='Мероприятие')
+    stack = models.ForeignKey(Stack, on_delete=models.PROTECT, verbose_name='Стек технологий')
+    stack = models.ManyToManyField(Stack, verbose_name='Стек технологий')
+
+    def __str__(self):
+        return f'#{self.event} {self.stack}'
 class UserEvent(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     event = models.ForeignKey(Event, on_delete=models.PROTECT, verbose_name='Мероприятие')
