@@ -9,6 +9,7 @@ aioredis = "*"
 environs = "*"
 asyncpg = "*"
 aioschedule = "*"
+qrcode = "*"
 
 [dev-packages]
 
