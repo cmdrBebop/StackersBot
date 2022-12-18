@@ -16,5 +16,16 @@ user_statistics = (
     'Мероприятия:\n'
 )
 
+user_information_for_check = (
+    """ФИО:
+    {userFullName}
+    
+    Стек:
+    {userStack}
+    
+    О себе:
+    {userAboutMe}
+    """
+)
 positive_toggle = 'Есть ✅'
 negative_toggle = 'Нет ⛔️'

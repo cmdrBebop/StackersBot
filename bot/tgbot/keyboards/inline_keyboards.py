@@ -35,6 +35,25 @@ def get_back_button(to: str, payload: str = '') -> InlineKeyboardMarkup:
 
     return keyboard
 
+
+form_about_me_start = InlineKeyboardMarkup(row_width=1)
+form_about_me_start.add(
+    InlineKeyboardButton('Да, хочу рассказать о себе',
+                         callback_data=callbacks.change_to_write_form.new(answer='yes')),
+    InlineKeyboardButton('Отказаться от заполнения анкеты',
+                         callback_data=callbacks.change_to_write_form.new(answer='cancel'))
+)
+
+conrol_asking_to_save_form = InlineKeyboardMarkup(row_width=2)
+conrol_asking_to_save_form.add(
+    InlineKeyboardButton('Сохранить анкету', callback_data=callbacks.control_ask.new(answer="ok"))
+)
+conrol_asking_to_save_form.row(
+    InlineKeyboardButton('Заполнить заново', callback_data=callbacks.control_ask.new(answer="again")),
+    InlineKeyboardButton('Отмена', callback_data=callbacks.control_ask.new(answer="cancel"))
+)
+
+
 # keySubsMenu = InlineKeyboardMarkup(row_width=2,
 #                                       inline_keyboard=[
 #                                           [
