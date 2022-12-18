@@ -10,7 +10,7 @@ class User(models.Model):
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
 
     def __str__(self):
-        return f'#{self.second_name} {self.first_name} {self.telegram_username}'
+        return f'{self.second_name} {self.first_name} {self.telegram_username}'
 
 
     class Meta:
@@ -25,7 +25,7 @@ class Subscribe(models.Model):
     vacancy_subscribe = models.BooleanField(verbose_name='Подписка на вакансии', default=True)
 
     def __str__(self):
-        return f'#{self.user} {self.hackathon_subscribe} {self.lecture_subscribe} {self.meet_up_subscribe} {self.vacancy_subscribe}'
+        return f'{self.user} {self.hackathon_subscribe} {self.lecture_subscribe} {self.meet_up_subscribe} {self.vacancy_subscribe}'
 
 
     class Meta:
@@ -37,7 +37,7 @@ class EventType(models.Model):
     title = models.CharField(max_length=50, verbose_name='Тип')
 
     def __str__(self):
-        return f'#{self.title}'
+        return f'{self.title}'
 
     class Meta:
         verbose_name = 'Тип мероприятия'
@@ -50,7 +50,7 @@ class Event(models.Model):
     post_about_event = models.TextField(verbose_name='Текст поста мероприятия')
 
     def __str__(self):
-        return f'#{self.title} {self.event_date}'
+        return f'{self.title} {self.event_date}'
 
 
     class Meta:
@@ -64,7 +64,7 @@ class UserEvent(models.Model):
     event = models.ForeignKey(Event, on_delete=models.PROTECT, verbose_name='Мероприятие')
 
     def __str__(self):
-        return f'#{self.user} {self.event}'
+        return f'{self.user} {self.event}'
 
     class Meta:
         verbose_name = 'Посетитель мероприятий'
@@ -74,7 +74,7 @@ class Stack(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название стека технологий')
 
     def __str__(self):
-        return f'#{self.title}'
+        return f'{self.title}'
 
     class Meta:
         verbose_name = 'Стек технологий'
@@ -85,7 +85,7 @@ class UserStack(models.Model):
     stack = models.ManyToManyField(Stack, verbose_name='Стек технологий')
 
     def __str__(self):
-        return f'#{self.user} {self.stack}'
+        return f'{self.user} {self.stack}'
 
     class Meta:
         verbose_name = 'Стек пользователя'
@@ -97,7 +97,7 @@ class EventStack(models.Model):
     stack = models.ManyToManyField(Stack, verbose_name='Стек технологий')
 
     def __str__(self):
-        return f'#{self.event} {self.stack}'
+        return f'{self.event} {self.stack}'
 
     class Meta:
         verbose_name = 'Стек мероприятия'
