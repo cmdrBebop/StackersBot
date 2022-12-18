@@ -30,15 +30,15 @@ subscribe_menu.add(
 form_about_me_start = InlineKeyboardMarkup(row_width=1)
 form_about_me_start.add(
     InlineKeyboardButton('Да, хочу рассказать о себе',
-                         callback_data=callbacks.change_to_write_form.new(answer='yes')),
+                         callback_data=callbacks.survey.new(to='fill_survey')),
     InlineKeyboardButton('Отказаться от заполнения анкеты',
-                         callback_data=callbacks.change_to_write_form.new(answer='cancel'))
+                         callback_data=callbacks.survey.new(to='cancel_survey'))
 )
 
 form_about_me_update = InlineKeyboardMarkup(row_width=1)
 form_about_me_update.add(
     InlineKeyboardButton('Хочу обновить свою анкету :)',
-                         callback_data=callbacks.change_to_update_form.new(answer='yes')),
+                         callback_data=callbacks.update_survey.new(to='update_survey')),
     InlineKeyboardButton('Назад',
                          callback_data=callbacks.navigation.new(to='main_menu', payload=''))
 )

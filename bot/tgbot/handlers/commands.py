@@ -13,7 +13,6 @@ async def command_start(message: Message, state: FSMContext):
     await state.finish()
 
     await message.answer(messages.hello, reply_markup=inline_keyboards.form_about_me_start)
-    await states.Survey.starting_completing.set()
 
 
 async def command_main_menu(message: Message, state: FSMContext):
