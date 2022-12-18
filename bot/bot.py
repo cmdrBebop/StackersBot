@@ -67,7 +67,7 @@ async def main():
     try:
         await dp.start_polling()
     finally:
-        await database.close_pools()
+        # await database.close_pools()
         await redis.save()
 
         bot_session = await bot.get_session()

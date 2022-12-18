@@ -26,16 +26,6 @@ subscribe_menu.add(
     InlineKeyboardButton('Назад', callback_data=callbacks.navigation.new(to='main_menu', payload=''))
 )
 
-
-def get_back_button(to: str, payload: str = '') -> InlineKeyboardMarkup:
-    keyboard = InlineKeyboardMarkup(row_width=1)
-    keyboard.add(
-        InlineKeyboardButton('Назад', callback_data=callbacks.navigation.new(to=to, payload=payload))
-    )
-
-    return keyboard
-
-
 form_about_me_start = InlineKeyboardMarkup(row_width=1)
 form_about_me_start.add(
     InlineKeyboardButton('Да, хочу рассказать о себе',
@@ -44,42 +34,20 @@ form_about_me_start.add(
                          callback_data=callbacks.change_to_write_form.new(answer='cancel'))
 )
 
-conrol_asking_to_save_form = InlineKeyboardMarkup(row_width=2)
-conrol_asking_to_save_form.add(
+control_asking_to_save_form = InlineKeyboardMarkup(row_width=2)
+control_asking_to_save_form.add(
     InlineKeyboardButton('Сохранить анкету', callback_data=callbacks.control_ask.new(answer="ok"))
 )
-conrol_asking_to_save_form.row(
+control_asking_to_save_form.row(
     InlineKeyboardButton('Заполнить заново', callback_data=callbacks.control_ask.new(answer="again")),
     InlineKeyboardButton('Отмена', callback_data=callbacks.control_ask.new(answer="cancel"))
 )
 
 
-# keySubsMenu = InlineKeyboardMarkup(row_width=2,
-#                                       inline_keyboard=[
-#                                           [
-#                                               InlineKeyboardButton(
-#                                                   text="Статус подписки на хакатоны",
-#                                                   callback_data=callSubsMenu.new(subsFor="ХакатоныПодп")
-#                                               )],
-#                                           [InlineKeyboardButton(
-#                                               text="Статус подписки на лекции",
-#                                               callback_data=callSubsMenu.new(subsFor="ЛекцииПодп")
-#                                           )],
-#                                           [InlineKeyboardButton(
-#                                               text="Статус подписки на Митапы",
-#                                               callback_data=callSubsMenu.new(subsFor="МитапыПодп"))
-#                                           ],
-#                                             [InlineKeyboardButton(
-#                                               text="Подписка на все",
-#                                               callback_data=callSubsMenu.new(subsFor="followAll")
-#                                             )
-#                                             ,InlineKeyboardButton(
-#                                               text="Отписка от всего",
-#                                               callback_data=callSubsMenu.new(subsFor="unfollowAll")
-#                                             )
-#                                         ],
-#                                             [InlineKeyboardButton(
-#                                               text="Назад",
-#                                               callback_data=callSubsMenu.new(subsFor="Cancel")
-#                                           )]
-#                                       ])
+def get_back_button(to: str, payload: str = '') -> InlineKeyboardMarkup:
+    keyboard = InlineKeyboardMarkup(row_width=1)
+    keyboard.add(
+        InlineKeyboardButton('Назад', callback_data=callbacks.navigation.new(to=to, payload=payload))
+    )
+
+    return keyboard

@@ -1,5 +1,6 @@
 hello = (
-    'Hello, {username}'
+    'Вы хотите заполнить анкету?\n'
+    'Это поможет стать нам ближе'
 )
 
 user_subscribes_status = (
@@ -17,15 +18,11 @@ user_statistics = (
 )
 
 user_information_for_check = (
-    """ФИО:
-    {userFullName}
-    
-    Стек:
-    {userStack}
-    
-    О себе:
-    {userAboutMe}
-    """
+    'ФИО: {user_full_name}\n'
+    'Стек: {user_stack}\n'
+    'О себе:\n'
+    '{user_about_me}'
 )
+
 positive_toggle = 'Есть ✅'
 negative_toggle = 'Нет ⛔️'
