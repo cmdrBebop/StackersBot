@@ -9,6 +9,12 @@ import tgbot.keyboards.inline_keyboards as inline_keyboards
 import tgbot.misc.callbacks as callbacks
 
 
+async def request_to_update_form(call: CallbackQuery):
+    # todo get information about user, add text for user's form
+    await call.message.answer("Вот моя анкета!!!!", reply_markup=inline_keyboards.form_about_me_update)
+    await states.Survey.starting_completing.set()
+
+
 async def form_competing_cancel(call: CallbackQuery, state: FSMContext):
     await call.message.delete()
 
@@ -72,6 +78,11 @@ def register_survey(dp: Dispatcher):
                                        state=states.Survey.starting_completing)
     dp.register_callback_query_handler(form_competition_ask_1, callbacks.change_to_write_form.filter(answer="yes"),
                                        state=states.Survey.starting_completing)
+    dp.register_callback_query_handler(form_competing_cancel, callbacks.change_to_update_form.filter(answer="cancel"),
+                                       state=states.Survey.starting_completing)
+    dp.register_callback_query_handler(form_competition_ask_1, callbacks.change_to_update_form.filter(answer="yes"),
+                                       state=states.Survey.starting_completing)
+
     dp.register_message_handler(form_competition_ask_2, state=states.Survey.name_ans)
     dp.register_message_handler(form_competition_ask_3, state=states.Survey.stack_ans)
     dp.register_message_handler(form_competition_control_ask, state=states.Survey.about_me_ans)
@@ -81,3 +92,4 @@ def register_survey(dp: Dispatcher):
     dp.register_callback_query_handler(form_success_saved,
                                        callbacks.control_ask.filter(answer="ok"),
                                        state=states.Survey.control_ask_to_save)
+    dp.register_callback_query_handler(request_to_update_form, callbacks.navigation.filter(to='form'))

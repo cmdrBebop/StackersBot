@@ -4,6 +4,7 @@ import tgbot.misc.callbacks as callbacks
 
 main_menu = InlineKeyboardMarkup(row_width=1)
 main_menu.add(
+    InlineKeyboardButton('Моя анкета', callback_data=callbacks.navigation.new(to='form', payload='')),
     InlineKeyboardButton('Подписки', callback_data=callbacks.navigation.new(to='subscribes', payload='')),
     InlineKeyboardButton('Статистика', callback_data=callbacks.navigation.new(to='statistics', payload='')),
     InlineKeyboardButton('Закрыть', callback_data=callbacks.navigation.new(to='close', payload='')),
@@ -32,6 +33,14 @@ form_about_me_start.add(
                          callback_data=callbacks.change_to_write_form.new(answer='yes')),
     InlineKeyboardButton('Отказаться от заполнения анкеты',
                          callback_data=callbacks.change_to_write_form.new(answer='cancel'))
+)
+
+form_about_me_update = InlineKeyboardMarkup(row_width=1)
+form_about_me_update.add(
+    InlineKeyboardButton('Хочу обновить свою анкету :)',
+                         callback_data=callbacks.change_to_update_form.new(answer='yes')),
+    InlineKeyboardButton('Оставить все, как есть',
+                         callback_data=callbacks.change_to_update_form.new(answer='cancel'))
 )
 
 control_asking_to_save_form = InlineKeyboardMarkup(row_width=2)
