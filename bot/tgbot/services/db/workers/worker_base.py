@@ -35,7 +35,7 @@ class Worker:
             self.pool = await asyncpg.create_pool(database=self._db_name, user=self._user, host=self._host,
                                                   password=self._password, port=self._port)
 
-    async def execute(self, *args, **kwargs) -> None:
+    async def execute(self, *args: object, **kwargs: object) -> None:
         if not self.pool:
             await self.connect()
 
