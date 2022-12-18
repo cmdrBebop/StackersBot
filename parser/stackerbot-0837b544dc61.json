@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "stackerbot",
+  "private_key_id": "0837b544dc61b85fb8f1264fd66374d3546c2765",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCy2Fgjq+Sqj4sW\nlHYU3Yt7tDqwr2w3cFZyeEBbjZRfcktlC4hOuMPZfubK4VyOgwXL2ddc4pIuw5km\nZow2IJ6puQ1Y5cMXUPuOLmPh+nnKy6mvwBHqfEjQnNku+ClLTJcaI4TcsLcHjWWK\nYJvWWJ0IgAKMKf1FzRnAsHMjf3Zgw0uvYhz4MewgKW2tAg4OMLx3fFSaLfWKOc6y\nDzI5a4MOYnY1FH4N0rCtVIMujSn/Amd1ci64qb6tUriIE0548OQ6oM6giM9DiSbq\nPdrnLQDxLmE/pMBkIqUr06MzFAk5z9A2s5A99xYZ7HPXdqCyj4im+MMIvCkOeOwq\ncWKx4TGhAgMBAAECggEAAPKcmbSKUsEtyLjw3N6hS76cV6Gn1129fwf6KRQJk+WG\n3tBMPLTN4KEDjYJbBXwuMYbAFW9jzHqzzOZS5pHm3lXPO1QFHApdSWMvez/q0Z1R\nevd3ztYRk5WrsNQOwbXsSG6lEG9xKlmMbtqxA7Zar2wAe3Q44eP2v6CtvQPCvYu0\nF9saYulQiJhBMLTgf8U8TEm6UOOT+L7d45AWAxfeaSqKCYNPNQfX/yOPgTJ+port\nCkc5JM9sadRqdZbt/0j+bUDCWmHcK4q1arwRXL6Uhn96Edjlp1QdvSV/PMO8zyrk\nfSAULodFwM9yazRCmdPbWOeTtE9WSPf+AcnFFHJRwQKBgQD4PzlufdnLQQ6d+5vR\noks6P4n/eGzzZfWCbwjr2fiFE8t4ThyTki4Y7MofUmkUk9vERqlF1uId2O9JOTO4\nPhFUBL6a0COgT2uNn4GBWU2+qRY7hKzTDgk1g0KuBVdVIxpXRNE+jLEJlF4SrYpw\ngxU34n5Cblv+R7QASJhM28LgYQKBgQC4bj2O1rWC3V8z4ejt68f41kcTI7iWdnyL\nhlTXgZt8jzWbStnOiv5YI6VOOSk9opC/62T3sUkKlf6N07BqAOvM75oFdAw5vNlr\nWoy7XZW2jmYZAYGi2waoeqpt2yvYHjVGziDX0ldTY4XHijhCRfI0YO0kSec0KDb9\nsJO6kbTZQQKBgQDubMrcNENZ08IWOfIOBbH638vKcf8yRlrmS35mB5OJPNnPUjZg\nBaYAimwWaTBDcz8/5B3v1dKWmCQ6T5Y8/l/mMiheyElvTtgdzXS0pvDkjcGsqGDU\n1EZD/y2rtbWLL4u9BXtyd+4RJU604bh1F3Dpm79oTlZMgtF+9DpSlz80AQKBgAzs\n5PGKyKPIQfDP51QtTxF4avjDax9YZHgezPlhgvUi0D326/bWtOaWcPJffS1tpDlf\nFO9rBFRymKl16Yo0UFJHhILXVDgDrTUh3nUPJPvrVOpxuZUhRoEuP519W8BEtbUl\noxWdDzOv6ONII5M5dbUICfaeG08Ddn8nDeNobMVBAoGBAN0vSr64fAInav/I8OS2\ntJlIh2flSQUNUJbP2nlDxjswWe/kjKb3oWy0pebI5D22M9hqnPdm8+xta1d9nfIP\nW5pP2KCkasl2PdFnySDjZGnLbEDdTvBgLg0ksdcV36tkMo6Fi3Mx2par1Ugz55Km\nM+7qjk2veK/E5poKQ0jkHnJ0\n-----END PRIVATE KEY-----\n",
+  "client_email": "account@stackerbot.iam.gserviceaccount.com",
+  "client_id": "100739425917773538030",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/account%40stackerbot.iam.gserviceaccount.com"
+}
