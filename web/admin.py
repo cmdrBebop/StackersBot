@@ -70,3 +70,4 @@ class StackAdmin(admin.ModelAdmin):
 class MessageAdmin(admin.ModelAdmin):
     list_display = ('id', 'profile', 'quastion', 'answer')
     list_display_links = ('id', 'profile', 'quastion', 'answer')
+
