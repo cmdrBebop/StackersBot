@@ -290,6 +290,8 @@ td, th {
 
 th {
     font-weight: 600;
+    font-size:145%;
+    font-family: serif;
     text-align: left;
 }
 
