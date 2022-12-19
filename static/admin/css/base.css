@@ -64,8 +64,8 @@ html, body {
 body {
     margin: 0;
     padding: 0;
-    font-size: 0.875rem;
-    font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    font-family: serif;
+    font-size: 95%;
     color: var(--body-fg);
     background: var(--body-bg);
 }
@@ -74,6 +74,8 @@ body {
 
 a:link, a:visited {
     color: var(--link-fg);
+    font-family: serif;
+    font-size:130%;
     text-decoration: none;
     transition: color 0.15s, background 0.15s;
 }
@@ -92,6 +94,8 @@ a img {
 
 a.section:link, a.section:visited {
     color: var(--header-link-color);
+    font-size:145%;
+    font-family: serif;
     text-decoration: none;
 }
 
@@ -115,6 +119,7 @@ h1,h2,h3,h4,h5 {
 }
 
 h1 {
+    font-family: serif;
     margin: 0 0 20px;
     font-weight: 300;
     font-size: 1.25rem;
@@ -441,9 +446,9 @@ input, textarea, select, .form-row p, form .button {
     margin: 2px 0;
     padding: 2px 3px;
     vertical-align: middle;
-    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    font-family: serif;
     font-weight: normal;
-    font-size: 0.8125rem;
+    font-size: 100%;
 }
 .form-row div.help {
     padding: 2px 3px;
@@ -965,6 +970,8 @@ a.deletelink:focus, a.deletelink:hover {
 
 #content-related h3 {
     color: var(--body-quiet-color);
+    font-size:140%;
+    font-family: serif;
     padding: 0 16px;
     margin: 0 0 16px;
 }
@@ -990,11 +997,12 @@ a.deletelink:focus, a.deletelink:hover {
 }
 
 #content-related .module h2 {
+    font-family: serif;
     background: none;
     padding: 16px;
     margin-bottom: 16px;
     border-bottom: 1px solid var(--hairline-color);
-    font-size: 1.125rem;
+    font-size: 180%;
     color: var(--body-fg);
 }
 
