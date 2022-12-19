@@ -70,5 +70,5 @@ class StackAdmin(admin.ModelAdmin):
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'profile', 'text', 'created_at')
-    list_display_links = ('id', 'profile', 'text', 'created_at')
+    list_display = ('id', 'profile', 'quastion', 'answer')
+    list_display_links = ('id', 'profile', 'quastion', 'answer')

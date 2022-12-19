@@ -66,10 +66,10 @@ class Event(models.Model):
     def __str__(self):
         return f'{self.title} {self.event_date}'
 
-
     class Meta:
         verbose_name = 'Мероприятие'
         verbose_name_plural = 'Мероприятия'
+
 
 class UserStack(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
@@ -85,6 +85,8 @@ class EventStack(models.Model):
 
     def __str__(self):
         return f'#{self.event} {self.stack}'
+
+
 class UserEvent(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     event = models.ForeignKey(Event, on_delete=models.PROTECT, verbose_name='Мероприятие')
@@ -97,20 +99,19 @@ class UserEvent(models.Model):
         verbose_name_plural = 'Посетители мероприятий'
 
 
-
-
 class Message(models.Model):
     profile = models.ForeignKey(
         to='web.User',
         verbose_name='Профиль',
         on_delete=models.PROTECT,
     )
-    text = models.TextField(
+    quastion = models.TextField(
         verbose_name='Текст',
     )
-    created_at = models.DateTimeField(
-        verbose_name='Время получения',
-        auto_now_add=True,
+    answer = models.TextField(
+        verbose_name='Ответ',
+        null=True,
+        blank=True,
     )
 
     def __str__(self):
