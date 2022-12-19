@@ -44,19 +44,19 @@ async def main():
     bot = Bot(token=config.bot.token, parse_mode='HTML')
     dp = Dispatcher(bot, storage=storage)
 
-    # database = Database(
-    #     host=config.database.host,
-    #     password=config.database.password,
-    #     user=config.database.user,
-    #     database=config.database.database,
-    #     port=config.database.port
-    # )
+    database = Database(
+        host=config.database.host,
+        password=config.database.password,
+        user=config.database.user,
+        database=config.database.database,
+        port=config.database.port
+    )
 
     redis = Redis()
 
     bot['config'] = config
     bot['redis'] = redis
-    # bot['database'] = database
+    bot['database'] = database
 
     register_all_middlewares(dp, config)
     register_all_filters(dp)
@@ -67,7 +67,7 @@ async def main():
     try:
         await dp.start_polling()
     finally:
-        # await database.close_pools()
+        await database.close_pools()
         await redis.save()
 
         bot_session = await bot.get_session()

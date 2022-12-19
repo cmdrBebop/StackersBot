@@ -25,9 +25,11 @@ class Database:
         }
 
         self.users_worker = workers.UsersWorker(**self._connect_data)
+        self.subscribe_worker = workers.SubscribeWorker(**self._connect_data)
 
         self.workers = [
             self.users_worker,
+            self.subscribe_worker
         ]
 
         self.logger = logging.getLogger(__name__)
