@@ -5,7 +5,7 @@ import tgbot.services.db.workers as workers
 
 
 class UsersWorker(Worker):
-    table_name = 'bot_user'
+    table_name = 'web_user'
 
     async def create(self):
         """
@@ -18,9 +18,22 @@ class UsersWorker(Worker):
         """
         pass
 
-    async def add_new_user(self, telegram_id, username, mention) -> None:
+    async def add_new_user(self, telegram_id: int, mention: str) -> None:
         sql = f'''
-        INSERT INTO {self.table_name} (telegram_id, username, mention) VALUES ({telegram_id}, '{username}', '{mention}')   
+        INSERT INTO {self.table_name} (tg_id, telegram_username) VALUES ({telegram_id}, '{mention}')
         '''
 
         await self.execute(sql)
+
+    async def get_user(self, telegram_id: int) -> asyncpg.Record | None:
+        sql = f'''
+        SELECT * from {self.table_name} WHERE tg_id = {telegram_id}
+        '''
+
+        return await self.fetchone(sql)
+
+    async def is_reg(self, telegram_id: int) -> bool:
+        record = await self.get_user(telegram_id)
+        if record:
+            return True
+        return False

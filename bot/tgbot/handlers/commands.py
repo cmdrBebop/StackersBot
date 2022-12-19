@@ -4,11 +4,17 @@ from aiogram.types import Message
 
 import tgbot.keyboards.inline_keyboards as inline_keyboards
 from tgbot.misc import messages
+from tgbot.services.db.database import Database
 
 
 async def command_start(message: Message, state: FSMContext):
+    database: Database = message.bot.get('database')
+
     await message.delete()
     await state.finish()
+
+    if not await database.users_worker.is_reg(message.from_user.id):
+        await database.users_worker.add_new_user(message.from_user.id, message.from_user.mention)
 
     await message.answer(messages.hello, reply_markup=inline_keyboards.form_about_me_start)
 

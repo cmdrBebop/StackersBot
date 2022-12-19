@@ -10,7 +10,7 @@ from tgbot.services.db.database import Database
 async def show_subscribe_menu(call: CallbackQuery, callback_data: dict):
     database: Database = call.bot.get('database')
     # todo: get toggles status from db
-    subs_status = database.subscribe_worker.get_subscribes(call.from_user.id)
+    subs_status = await database.subscribe_worker.get_subscribes(call.from_user.id)
 
     print(subs_status)
     await call.message.edit_text(messages.user_subscribes_status.format(
