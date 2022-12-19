@@ -51,8 +51,6 @@ class EventAdmin(admin.ModelAdmin):
         publish(queryset.values()[0])
 
 
-
-
 @admin.register(UserEvent)
 class UserEventAdmin(admin.ModelAdmin):
     list_display = ('user', 'event')

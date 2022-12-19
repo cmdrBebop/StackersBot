@@ -14,10 +14,10 @@ class Stack(models.Model):
 
 class User(models.Model):
     tg_id = models.IntegerField(verbose_name='telegram id', primary_key=True)
-    first_name = models.CharField(max_length=30, verbose_name='Имя пользователя')
-    second_name = models.CharField(max_length=30, verbose_name='Фамилия пользователя')
-    birthdate = models.DateField(verbose_name='Дата рождения пользователя')
-    about_user = models.TextField(verbose_name='О пользователе')
+    first_name = models.CharField(max_length=30, verbose_name='Имя пользователя', null=True)
+    second_name = models.CharField(max_length=30, verbose_name='Фамилия пользователя', null=True)
+    birthdate = models.DateField(verbose_name='Дата рождения пользователя', null=True)
+    about_user = models.TextField(verbose_name='О пользователе', null=True)
     telegram_username = models.CharField(max_length=50, verbose_name='telegram', unique=True)
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
     stacks = models.ManyToManyField(Stack)
