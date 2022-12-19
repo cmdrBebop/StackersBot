@@ -67,3 +67,14 @@ class StackForm(forms.ModelForm):
             'id',
             'title',
         )
+
+
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = (
+            'id',
+            'profile',
+            'quastion',
+            'answer',
+        )

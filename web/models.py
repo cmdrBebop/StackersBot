@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Stack(models.Model):
-    title = models.CharField(max_length=100, verbose_name='Название стека технологий')
+    title = models.CharField(max_length=100, verbose_name='Название стека технологий', unique=True)
 
     def __str__(self):
         return f'{self.title}'
@@ -14,10 +14,10 @@ class Stack(models.Model):
 
 class User(models.Model):
     tg_id = models.IntegerField(verbose_name='telegram id', primary_key=True)
-    first_name = models.CharField(max_length=30, verbose_name='Имя пользователя')
-    second_name = models.CharField(max_length=30, verbose_name='Фамилия пользователя')
-    birthdate = models.DateField(verbose_name='Дата рождения пользователя')
-    about_user = models.TextField(verbose_name='О пользователе')
+    first_name = models.CharField(max_length=30, verbose_name='Имя пользователя', null=True)
+    second_name = models.CharField(max_length=30, verbose_name='Фамилия пользователя', null=True)
+    birthdate = models.DateField(verbose_name='Дата рождения пользователя', null=True)
+    about_user = models.TextField(verbose_name='О пользователе', null=True)
     telegram_username = models.CharField(max_length=50, verbose_name='telegram', unique=True)
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
     stacks = models.ManyToManyField(Stack)
@@ -31,7 +31,7 @@ class User(models.Model):
 
 
 class Subscribe(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', unique=True)
     hackathon_subscribe = models.BooleanField(verbose_name='Подписка на хакатоны', default=True)
     lecture_subscribe = models.BooleanField(verbose_name='Подписка на лекции', default=True)
     meet_up_subscribe = models.BooleanField(verbose_name='Подписка на meet ups', default=True)
@@ -46,7 +46,7 @@ class Subscribe(models.Model):
 
 
 class EventType(models.Model):
-    title = models.CharField(max_length=50, verbose_name='Тип')
+    title = models.CharField(max_length=50, verbose_name='Тип', unique=True)
 
     def __str__(self):
         return f'{self.title}'
@@ -66,14 +66,13 @@ class Event(models.Model):
     def __str__(self):
         return f'{self.title} {self.event_date}'
 
-
     class Meta:
         verbose_name = 'Мероприятие'
         verbose_name_plural = 'Мероприятия'
 
+
 class UserStack(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
-    stack = models.ForeignKey(Stack, on_delete=models.PROTECT, verbose_name='Стек технологий')
     stack = models.ManyToManyField(Stack, verbose_name='Стек технологий')
 
     def __str__(self):
@@ -82,11 +81,12 @@ class UserStack(models.Model):
 
 class EventStack(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name='Мероприятие')
-    stack = models.ForeignKey(Stack, on_delete=models.PROTECT, verbose_name='Стек технологий')
     stack = models.ManyToManyField(Stack, verbose_name='Стек технологий')
 
     def __str__(self):
         return f'#{self.event} {self.stack}'
+
+
 class UserEvent(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     event = models.ForeignKey(Event, on_delete=models.PROTECT, verbose_name='Мероприятие')
@@ -99,20 +99,19 @@ class UserEvent(models.Model):
         verbose_name_plural = 'Посетители мероприятий'
 
 
-
-
 class Message(models.Model):
     profile = models.ForeignKey(
         to='web.User',
         verbose_name='Профиль',
         on_delete=models.PROTECT,
     )
-    text = models.TextField(
+    quastion = models.TextField(
         verbose_name='Текст',
     )
-    created_at = models.DateTimeField(
-        verbose_name='Время получения',
-        auto_now_add=True,
+    answer = models.TextField(
+        verbose_name='Ответ',
+        null=True,
+        blank=True,
     )
 
     def __str__(self):

@@ -80,7 +80,7 @@ DATABASES = { "default":
                   { "ENGINE": "django.db.backends.postgresql",
                     "NAME": "stackers_db",
                     "USER": "postgres",
-                    "PASSWORD": "123456789",
+                    "PASSWORD": "Millioner1000000",
                     "HOST": "localhost",
                     "PORT": 543}
               }
