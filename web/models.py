@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Stack(models.Model):
-    title = models.CharField(max_length=100, verbose_name='Название стека технологий')
+    title = models.CharField(max_length=100, verbose_name='Название стека технологий', unique=True)
 
     def __str__(self):
         return f'{self.title}'
@@ -31,7 +31,7 @@ class User(models.Model):
 
 
 class Subscribe(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', unique=True)
     hackathon_subscribe = models.BooleanField(verbose_name='Подписка на хакатоны', default=True)
     lecture_subscribe = models.BooleanField(verbose_name='Подписка на лекции', default=True)
     meet_up_subscribe = models.BooleanField(verbose_name='Подписка на meet ups', default=True)
@@ -46,7 +46,7 @@ class Subscribe(models.Model):
 
 
 class EventType(models.Model):
-    title = models.CharField(max_length=50, verbose_name='Тип')
+    title = models.CharField(max_length=50, verbose_name='Тип', unique=True)
 
     def __str__(self):
         return f'{self.title}'
