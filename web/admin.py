@@ -1,15 +1,16 @@
 from django.contrib import admin
+from django.db.models import QuerySet
 from django_admin_filters import MultiChoice
+
+from mailing import publish
 from .forms import *
 from .models import *
-
-
-
 
 
 class StatusFilter(MultiChoice):
     FILTER_LABEL = "По стеку"
     BUTTON_LABEL = "Применить"
+
 
 @admin.register(User)
 class ProfileAdmin(admin.ModelAdmin):
@@ -18,7 +19,6 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('tg_id', 'first_name', 'second_name', 'telegram_username')
     form = UserForm
     filter_horizontal = ['stacks']
-    list_filter = [('stacks__title', StatusFilter)]
 
 
 @admin.register(Subscribe)
@@ -44,6 +44,13 @@ class EventAdmin(admin.ModelAdmin):
     search_fields = ('title', 'post_about_event')
     form = EventForm
     filter_horizontal = ['stacks']
+    actions = ['mailing']
+
+    @admin.action(description='Рассылка')
+    def mailing(self, request, queryset):
+        publish(queryset.values()[0])
+
+
 
 
 @admin.register(UserEvent)
@@ -59,7 +66,6 @@ class StackAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
     list_display_links = ('id', 'title')
     form = StackForm
-
 
 
 @admin.register(Message)
