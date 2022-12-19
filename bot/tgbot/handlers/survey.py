@@ -8,11 +8,20 @@ import tgbot.keyboards.inline_keyboards as inline_keyboards
 import tgbot.misc.callbacks as callbacks
 import tgbot.misc.messages as messages
 from tgbot.misc import states
+from tgbot.services.db.database import Database
 
 
 async def show_survey_menu(call: CallbackQuery):
-    # todo get information about user, add text for user's form
-    await call.message.edit_text("Вот моя анкета!!!!", reply_markup=inline_keyboards.form_about_me_update)
+    database: Database = call.bot.get('database')
+
+    user = await database.users_worker.get_user(call.from_user.id)
+    msg = messages.user_information_for_check.format(
+        user_full_name=user['second_name'] + user['first_name'],
+        user_birth_date=user['birthdate'],
+        user_stack=user['stacks'],
+        user_about_me=user['about_user']
+    )
+    await call.message.edit_text(msg, reply_markup=inline_keyboards.form_about_me_update)
     await call.answer()
 
 
@@ -67,7 +76,19 @@ async def get_survey(message: Message, state: FSMContext):
 
 
 async def form_success_saved(call: CallbackQuery, state: FSMContext):
+    database: Database = call.bot.get('database')
     await call.message.delete()
+
+    user_data = await state.get_data()
+    second_name, first_name = user_data["usrFullName"].split()
+    print(datetime.datetime.strptime(user_data["usrBirthDate"], '%d.%m.%Y').date())
+    stack = user_data["usrStack"].split(',')
+    print(stack)
+
+    await database.users_worker.add_survey_info(
+        call.from_user.id, first_name, second_name,
+        datetime.datetime.strptime(user_data["usrBirthDate"], '%d.%m.%Y').date(), user_data["usrAboutMe"]
+    )
 
     await call.message.answer('Главное меню', reply_markup=inline_keyboards.main_menu)
     await call.answer('Ваша анкета успешно сохранена!')

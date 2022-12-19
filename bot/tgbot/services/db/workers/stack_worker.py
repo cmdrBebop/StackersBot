@@ -24,3 +24,10 @@ class StackWorker(Worker):
         '''
 
         await self.execute(sql)
+
+    async def get_stack(self, stack_id: int) -> asyncpg.Record:
+        sql = f'''
+        SELECT * FROM {self.table_name} WHERE id={stack_id}
+        '''
+
+        return await self.fetchone(sql)

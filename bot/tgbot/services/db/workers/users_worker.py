@@ -1,3 +1,5 @@
+import datetime
+
 import asyncpg
 
 from tgbot.services.db.workers.worker_base import Worker
@@ -37,3 +39,13 @@ class UsersWorker(Worker):
         if record:
             return True
         return False
+
+    async def add_survey_info(self, telegram_id: int, first_name: str, second_name: str, birthdate: datetime.date,
+                              about: str) -> None:
+        print(type(birthdate))
+        sql = f'''
+        UPDATE {self.table_name} SET first_name='{first_name}', second_name='{second_name}',
+        birthdate={str(birthdate)}::date, about='{about}' WHERE tg_id={telegram_id}
+        '''
+
+        await self.execute(sql)
