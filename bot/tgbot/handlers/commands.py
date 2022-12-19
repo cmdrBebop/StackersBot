@@ -15,6 +15,7 @@ async def command_start(message: Message, state: FSMContext):
 
     if not await database.users_worker.is_reg(message.from_user.id):
         await database.users_worker.add_new_user(message.from_user.id, message.from_user.mention)
+        await database.subscribe_worker.add_subscribes(message.from_user.id)
 
     await message.answer(messages.hello, reply_markup=inline_keyboards.form_about_me_start)
 

@@ -29,14 +29,18 @@ class SubscribeWorker(Worker):
 
     async def get_subscribes(self, telegram_id: int) -> asyncpg.Record:
         sql = f'''
-        SELECT hackathon_subscribe, lecture_subscribe, meet_up_subscribe, vacancy_subscribe FROM {self.table_name} WHERE id={telegram_id}
+        SELECT hackathon_subscribe, lecture_subscribe, meet_up_subscribe, vacancy_subscribe FROM {self.table_name} WHERE user_id={telegram_id}
         '''
 
         return await self.fetchone(sql)
 
     async def update_subscribe(self, telegram_id: int, subscribe: str, sub_status: bool) -> None:
         sql = f'''
-        UPDATE {self.table_name} SET {subscribe}={sub_status} WHERE id={telegram_id}
+        UPDATE {self.table_name} SET {subscribe}={sub_status} WHERE user_id={telegram_id}
         '''
 
         await self.execute(sql)
+
+    async def toggle_subscribe(self, telegram_id: int, subscribe: str) -> None:
+        record = (await self.get_subscribes(telegram_id))[subscribe]
+        await self.update_subscribe(telegram_id, subscribe, not record)

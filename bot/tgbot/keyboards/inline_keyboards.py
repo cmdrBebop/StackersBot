@@ -13,15 +13,15 @@ main_menu.add(
 subscribe_menu = InlineKeyboardMarkup(row_width=1)
 subscribe_menu.add(
     InlineKeyboardButton('Изменить статус подписки на Хакатоны',
-                         callback_data=callbacks.change_subscribe.new(object='hackathon')),
+                         callback_data=callbacks.change_subscribe.new(action='change_sub', object='hackathon_subscribe')),
     InlineKeyboardButton('Изменить статус подписки на Лекции',
-                         callback_data=callbacks.change_subscribe.new(object='lecture')),
+                         callback_data=callbacks.change_subscribe.new(action='change_sub', object='lecture_subscribe')),
     InlineKeyboardButton('Изменить статус подписки на Митапы',
-                         callback_data=callbacks.change_subscribe.new(object='meet_up'))
+                         callback_data=callbacks.change_subscribe.new(action='change_sub', object='meet_up_subscribe'))
 )
 subscribe_menu.row(
-    InlineKeyboardButton('Подписка на все', callback_data=callbacks.change_subscribe.new(object='sub_all')),
-    InlineKeyboardButton('Отписка от всего', callback_data=callbacks.change_subscribe.new(object='unsub_all'))
+    InlineKeyboardButton('Подписка на все', callback_data=callbacks.change_subscribe.new(action='all_toggle', object='sub')),
+    InlineKeyboardButton('Отписка от всего', callback_data=callbacks.change_subscribe.new(action='all_toggle', object='unsub'))
 )
 subscribe_menu.add(
     InlineKeyboardButton('Назад', callback_data=callbacks.navigation.new(to='main_menu', payload=''))

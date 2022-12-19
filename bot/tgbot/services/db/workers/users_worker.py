@@ -20,7 +20,7 @@ class UsersWorker(Worker):
 
     async def add_new_user(self, telegram_id: int, mention: str) -> None:
         sql = f'''
-        INSERT INTO {self.table_name} (tg_id, telegram_username) VALUES ({telegram_id}, '{mention}')
+        INSERT INTO {self.table_name} (tg_id, telegram_username, rating) VALUES ({telegram_id}, '{mention}', 0)
         '''
 
         await self.execute(sql)
