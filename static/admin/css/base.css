@@ -75,7 +75,6 @@ body {
 a:link, a:visited {
     color: var(--link-fg);
     font-family: serif;
-    font-size:130%;
     text-decoration: none;
     transition: color 0.15s, background 0.15s;
 }
@@ -94,7 +93,7 @@ a img {
 
 a.section:link, a.section:visited {
     color: var(--header-link-color);
-    font-size:145%;
+    font-size:130%;
     font-family: serif;
     text-decoration: none;
 }
@@ -290,7 +289,7 @@ td, th {
 
 th {
     font-weight: 600;
-    font-size:145%;
+    font-size: 110%;
     font-family: serif;
     text-align: left;
 }
