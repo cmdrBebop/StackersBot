@@ -15,10 +15,12 @@ async def show_survey_menu(call: CallbackQuery):
     database: Database = call.bot.get('database')
 
     user = await database.users_worker.get_user(call.from_user.id)
+    stack_ids = await database.user_stacks_worker.get_stack_ids(call.from_user.id)
+    stacks = [(await database.stack_worker.get_stack_by_id(stack_id))['title'] for stack_id in stack_ids]
     msg = messages.user_information_for_check.format(
         user_full_name=user['second_name'] + user['first_name'],
-        user_birth_date=user['birthdate'],
-        user_stack=user['stacks'],
+        user_birth_date=user['birthdate'].strftime('%d.%m.%Y'),
+        user_stack=','.join(stacks),
         user_about_me=user['about_user']
     )
     await call.message.edit_text(msg, reply_markup=inline_keyboards.form_about_me_update)
@@ -31,7 +33,7 @@ async def refuse_fill_survey(call: CallbackQuery, state: FSMContext):
 
 
 async def input_fullname(call: CallbackQuery):
-    await call.message.edit_text("Введите Фамилию и Имя через символ пробела:")
+    await call.message.edit_text("Введите Фамилию и Имя (Иванов Петя):")
     await states.Survey.name_ans.set()
     await call.answer()
 
@@ -39,7 +41,7 @@ async def input_fullname(call: CallbackQuery):
 async def input_birthday(message: Message, state: FSMContext):
     await state.update_data(usrFullName=message.text)
     await states.Survey.birth_ans.set()
-    await message.answer("Введите дату своего рождения в формате dd.mm.yyyy:")
+    await message.answer("Введите дату своего рождения(01.01.1970):")
 
 
 async def input_stack(message: Message, state: FSMContext):
@@ -51,13 +53,13 @@ async def input_stack(message: Message, state: FSMContext):
         return
     await state.update_data(usrBirthDate=message.text)
     await states.Survey.stack_ans.set()
-    await message.answer("Введите свой стек:")
+    await message.answer("Введите свой стек через запятую:")
 
 
 async def input_about_yourself(message: Message, state: FSMContext):
     await state.update_data(usrStack=message.text)
     await states.Survey.about_me_ans.set()
-    await message.answer("Расскажите о себе:")
+    await message.answer("Расскажите о себе(какой опыт работы, чем увлекаешься и что бы хотел делать):")
 
 
 async def get_survey(message: Message, state: FSMContext):
@@ -81,9 +83,12 @@ async def form_success_saved(call: CallbackQuery, state: FSMContext):
 
     user_data = await state.get_data()
     second_name, first_name = user_data["usrFullName"].split()
-    print(datetime.datetime.strptime(user_data["usrBirthDate"], '%d.%m.%Y').date())
-    stack = user_data["usrStack"].split(',')
-    print(stack)
+
+    stacks = user_data["usrStack"].split(',')
+    for stack in stacks:
+        stack_id = await database.stack_worker.set_stack(stack)
+        if stack_id:
+            await database.user_stacks_worker.add_new_stack(call.from_user.id, stack_id)
 
     await database.users_worker.add_survey_info(
         call.from_user.id, first_name, second_name,

@@ -18,16 +18,28 @@ class StackWorker(Worker):
         """
         pass
 
-    async def add_new_stack(self, stack) -> None:
+    async def add_new_stack(self, stack: str) -> asyncpg.Record:
         sql = f'''
-        INSERT INTO {self.table_name} (title) VALUES ('{stack}')   
+        INSERT INTO {self.table_name} (title) VALUES ('{stack}') RETURNING id   
         '''
 
-        await self.execute(sql)
+        return await self.fetchone(sql)
 
-    async def get_stack(self, stack_id: int) -> asyncpg.Record:
+    async def get_stack_by_id(self, stack_id: int) -> asyncpg.Record:
         sql = f'''
         SELECT * FROM {self.table_name} WHERE id={stack_id}
         '''
 
         return await self.fetchone(sql)
+
+    async def get_stack_by_title(self, stack: str) -> asyncpg.Record | None:
+        sql = f'''
+        SELECT * FROM {self.table_name} WHERE title='{stack}'
+        '''
+
+        return await self.fetchone(sql)
+
+    async def set_stack(self, stack: str) -> int | None:
+        record = await self.get_stack_by_title(stack)
+        if not record:
+            return (await self.add_new_stack(stack))['id']

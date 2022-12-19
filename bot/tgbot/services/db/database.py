@@ -26,10 +26,14 @@ class Database:
 
         self.users_worker = workers.UsersWorker(**self._connect_data)
         self.subscribe_worker = workers.SubscribeWorker(**self._connect_data)
+        self.stack_worker = workers.StackWorker(**self._connect_data)
+        self.user_stacks_worker = workers.UserStackWorker(**self._connect_data)
 
         self.workers = [
             self.users_worker,
-            self.subscribe_worker
+            self.subscribe_worker,
+            self.stack_worker,
+            self.user_stacks_worker
         ]
 
         self.logger = logging.getLogger(__name__)
