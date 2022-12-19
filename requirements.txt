@@ -1,4 +1,0 @@
-django~=4.1.2
-psycopg2-binary~=2.9.4
-django-admin-list-filters
-django_admin_filters

@@ -1,8 +1,7 @@
 from django.contrib import admin, messages
-from django.db.models import QuerySet
 from django_admin_filters import MultiChoice
 
-from mailing import publish
+from admin.mailing import publish
 from .forms import *
 from .models import *
 

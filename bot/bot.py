@@ -38,7 +38,7 @@ async def main():
         handlers=(logging.FileHandler(r'logs.log'), logging.StreamHandler())
     )
     logger.info('Starting bot')
-    config = load_config('../.env')
+    config = load_config('.env')
 
     storage = RedisStorage2() if config.bot.use_redis else MemoryStorage()
     bot = Bot(token=config.bot.token, parse_mode='HTML')
