@@ -6,21 +6,16 @@ services:
     container_name: "${BOT_CONTAINER_NAME:-tg_bot-container}"
     stop_signal: SIGINT
     build:
-      context: ./bot
+      context: .
     working_dir: "/usr/src/app/${BOT_NAME:-tg_bot}"
     volumes:
     - .:/usr/src/app/${BOT_NAME:-tg_bot}
-    # command: python3 -m ./bot/bot
+    # command: python3 -m bot
     restart: always
     env_file:
-      - "./bot/.env"
+      - ".env"
     networks:
     - tg_bot
-#  django:
-#       build: .
-#       command: python3 manage.py runserver localhost:8000
-#       ports:
-#           - 8000:8000
 
 
 networks:
