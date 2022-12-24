@@ -1,9 +1,10 @@
 from django.contrib import admin, messages
 from django_admin_filters import MultiChoice
 
-from admin.mailing import publish
+# from .mailing import publish
 from .forms import *
 from .models import *
+from mailing import publish
 
 
 class StatusFilter(MultiChoice):

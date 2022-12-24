@@ -5,4 +5,5 @@ WORKDIR /app
 ADD ./app
 
 RUN python -m pip install --upgrade pip
-RUN pip install pipenv && pipenv install --system --deploy
+RUN pip install -r requirements.txt
+#RUN python -m manage.py
