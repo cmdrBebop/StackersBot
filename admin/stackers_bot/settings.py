@@ -79,8 +79,8 @@ WSGI_APPLICATION = 'stackers_bot.wsgi.application'
 DATABASES = { "default":
                   { "ENGINE": "django.db.backends.postgresql",
                     "NAME": "stackers_db",
-                    "USER": "postgres",
-                    "PASSWORD": "Millioner1000000",
+                    "USER": "stackers_bot",
+                    "PASSWORD": "password",
                     "HOST": "localhost",
                     "PORT": 5432}
               }

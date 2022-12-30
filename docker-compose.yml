@@ -1,6 +1,27 @@
 version: '3.3'
 
 services:
+  db:
+    image: postgres:14.5-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_DB=stackers_db
+      - POSTGRES_USER=stackers_bot
+      - POSTGRES_PASSWORD=password
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  django:
+    build: ./admin
+    command: python3 manage.py runserver localhost:8000
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
   bot:
     image: "${BOT_IMAGE_NAME:-tg_bot-image}"
     container_name: "${BOT_CONTAINER_NAME:-tg_bot-container}"
@@ -10,18 +31,18 @@ services:
     working_dir: "/usr/src/app/${BOT_NAME:-tg_bot}"
     volumes:
     - .:/usr/src/app/${BOT_NAME:-tg_bot}
-    # command: python3 -m ./bot/bot
+    command: python3 -m bot
     restart: always
     env_file:
       - "./bot/.env"
     networks:
     - tg_bot
-  django:
-       build: ./admin
-       command: python3 manage.py runserver localhost:8000
-       ports:
-           - 8000:8000
+    depends_on:
+      - django
+      - redis
 
+volumes:
+  postgres_data:
 
 networks:
   tg_bot:
