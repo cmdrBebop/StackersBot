@@ -107,6 +107,7 @@ celerybeat.pid
 # Environments
 bot/.env
 admin/.env
+admin/.env.dev
 .venv
 env/
 venv/
