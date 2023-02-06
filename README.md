@@ -3,14 +3,12 @@ Application for tracking the skills of students for further invitations for inte
 
 ## Run
 
-Для работы с проектом нужно установить [python](http://python.org).
+Для развертывания проекта используется Docker. 
 
-- python -m venv .venv - создание виртуального окружения
-- source ./.venv/bin/activate - вход в виртуальное окружение
-- pip install -r requirements.txt - установка зависимостей
-- python manage.py migrate - выполнить миграции
-- python manage.py collectstatic - подключаем статические файлы библиотеки
-- python manage.py runserver - запуск сервера для разработки на http://localhost:8000
+- Необходимо установить docker и docker-compose.
+- Заполнить .env файлы в соответствии с их шаблонами .env.dist
+- Миграции применяются автоматически в entrypoint
+- Суперпользователь создается сам, его юзернейм и пароль надо указать в .env
 
 ## Contributors
 | Person      | GitLab | Role |
